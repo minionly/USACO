@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+
+const int sz = 1e6 + 5;
+const int mod = 1e9 + 7;
+long long a[sz], f[sz];
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("main.inp","r",stdin);
+    // freopen("main.out","w",stdout);
+
+    int n, k;
+    cin>>n>>k;
+
+    for(int i=1;i<=n;++i){
+        cin>>a[i];
+    }
+
+    f[0] = 1;
+    for(int j=1;j<=k;++j){
+        for(int i=1;i<=n;++i){
+            if(j >= a[i]){
+                f[j] = (f[j] + f[j - a[i]]) % mod;
+            }
+        }
+    }
+
+    cout<<f[k];
+
+    return 0;
+}
