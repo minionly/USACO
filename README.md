@@ -11,8 +11,5 @@
       - [Book Shop](https://github.com/minionly/USACO/blob/main/USACO/Book%20Shop)
       - [Money Sums](https://github.com/minionly/USACO/blob/main/USACO/Money%20Sums)
       - [Two Sets II](https://github.com/minionly/USACO/blob/main/USACO/Two%20Sets%20II)
-    - Paths on Grids
-    - Longest Increasing Subsequence
-    - Bitmask DP
-    - Range DP
-    - Digit DP
+- Graphs
+    - Shortest Paths with Unweighted Edges
