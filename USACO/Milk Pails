@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+#define pii pair<int, int>
+
+int d[105][105];
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("test.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+    freopen("pails.in","r",stdin);
+    freopen("pails.out","w",stdout);
+
+    int x, y, k, m;
+    cin>>x>>y>>k>>m;
+
+    queue<pair<int, pii>> q;
+    memset(d, 0x3f, sizeof(d));
+    q.push({0, {0, 0}});
+
+    int ans = 1e9;
+    while(q.size()){
+        int w = q.front().first;
+        int u = q.front().second.first;
+        int v = q.front().second.second;
+        d[u][v] = w;
+        q.pop();
+
+        ans = min(ans, abs(u + v - m));
+        if(w == k){
+            continue;
+        }
+
+        if(w + 1 < d[x][v]){
+            q.push({w+1, {x, v}});
+        }
+        if(w + 1< d[u][y]){
+            q.push({w + 1, {u, y}});
+        }
+        if(w + 1< d[0][v]){
+            q.push({w + 1, {0, v}});
+        }
+        if(w + 1 < d[u][0]){
+            q.push({w + 1, {u, 0}});
+        }
+
+        int temp = min(u, y - v); //pour u -> v
+        if(w + 1 < d[u - temp][v + temp]){
+            q.push({w + 1, {u - temp, v + temp}});
+        }
+        
+        temp = min(x - u, v);
+        if(w + 1< d[u + temp][v - temp]){//pour v -> u
+            q.push({w + 1,{u + temp, v - temp}});
+        }
+    }
+
+    cout<<ans;
+
+    return 0;
+}
