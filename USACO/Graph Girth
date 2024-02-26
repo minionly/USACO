@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+
+const int sz = 2505;
+vector<int> gr[sz];
+int vi[sz], viid = 0;
+int d[sz], ans = 1e9;
+
+void bfs(int s){
+    fill(d, d+sz, 1e9);
+    d[s] = 0;
+    vi[s] = ++viid;
+    queue<int> q;
+    q.push(s);
+
+    while(q.size()){
+        int u = q.front();
+        q.pop();
+
+        for(int v: gr[u]){
+            if(vi[v] != viid){
+                d[v] = d[u] + 1;
+                vi[v] = viid;
+                q.push(v);
+            }
+            else if(d[u] <= d[v]){
+                ans = min(ans, d[u] + 1 + d[v]);
+            }
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("test.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+
+    int n, m;
+    cin>>n>>m;
+
+    while(m--){
+        int u, v;
+        cin>>u>>v;
+        gr[u].push_back(v);
+        gr[v].push_back(u);
+    }
+
+    for(int i=1;i<=n;++i){
+        bfs(i);
+    }
+
+    cout<<(ans == 1e9 ? -1 : ans);
+
+    return 0;
+}
