@@ -8,6 +8,7 @@
       - [Coin Combinations I](https://github.com/minionly/USACO/blob/main/USACO/Coin%20Combinations%20)
       - [Coin Combinations II](https://github.com/minionly/USACO/blob/main/USACO/Coin%20Combinations%20II)
       - [F - #(subset sum = K) with Add and Erase](https://github.com/minionly/USACO/blob/main/USACO/F%20-%20%23(subset%20sum%20%3D%20K)%20with%20Add%20and%20Erase)
+      - [Book Shop](https://github.com/minionly/USACO/blob/main/USACO/Book%20Shop)
     - Paths on Grids
     - Longest Increasing Subsequence
     - Bitmask DP
