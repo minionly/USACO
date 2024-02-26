@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+
+const int sz = 1e6 + 5;
+vector<int> gr[sz];
+long long B, E, P, n, m;
+long long d[5][sz];
+
+void bfs(int s, int k){
+    queue<int> q;
+    q.push(s);
+    d[k][s] = 0;
+
+    while(q.size()){
+        int u = q.front();
+        q.pop();
+
+        for(int v : gr[u]){
+            if(d[k][u] + 1 < d[k][v]){
+                d[k][v] = d[k][u] + 1;
+                q.push(v);
+            }
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("test.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+    freopen("piggyback.in","r",stdin);
+    freopen("piggyback.out","w",stdout);
+
+    cin>>B>>E>>P>>n>>m;
+
+    while(m--){
+        int u, v;
+        cin>>u>>v;
+        gr[u].push_back(v);
+        gr[v].push_back(u);
+    }
+
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<5;++j){
+            d[j][i] = 1e18;
+        }
+    }
+
+    bfs(1, 1);
+    bfs(2, 2);
+    bfs(n, 3);
+
+    long long ans = d[1][n]*B + d[2][n]*E;
+    for(int i=1;i<=n;++i){
+        ans = min(ans, d[1][i]*B + d[2][i]*E + d[3][i]*P);
+    }
+
+    cout<<ans;
+
+    return 0;
+}
