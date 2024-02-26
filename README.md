@@ -14,3 +14,5 @@
 - Graphs
     - Shortest Paths with Unweighted Edges
       - [Piggy Back](https://github.com/minionly/USACO/blob/main/USACO/Piggyback)
+      - [Milk Pails](https://github.com/minionly/USACO/blob/main/USACO/Milk%20Pails)
+      
