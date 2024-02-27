@@ -12,6 +12,7 @@
       - [Money Sums](https://github.com/minionly/USACO/blob/main/USACO/Money%20Sums)
       - [Two Sets II](https://github.com/minionly/USACO/blob/main/USACO/Two%20Sets%20II)
       - [Knapsack](https://github.com/minionly/USACO/blob/main/USACO/Knapsack)
+      - [Fruit Feast](https://github.com/minionly/USACO/blob/main/USACO/Fruit%20Feast)
 - Graphs
     - Shortest Paths with Unweighted Edges
       - [Piggy Back](https://github.com/minionly/USACO/blob/main/USACO/Piggyback)
