@@ -18,3 +18,5 @@
       - [Piggy Back](https://github.com/minionly/USACO/blob/main/USACO/Piggyback)
       - [Milk Pails](https://github.com/minionly/USACO/blob/main/USACO/Milk%20Pails)
       - [Graph Girth](https://github.com/minionly/USACO/blob/main/USACO/Graph%20Girth)
+      - [BFS-DFS](https://github.com/minionly/USACO/blob/main/BFS-DFS)
+      - [Lasers and Mirrors](https://github.com/minionly/USACO/blob/main/USACO/Lasers%20and%20Mirrors)
