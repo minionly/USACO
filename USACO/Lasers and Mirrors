@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+#define pll pair<long long, long long>
+
+const int sz = 1e6 + 5;
+map<long long, vector<long long>> gr[5];
+pll a[sz];
+long long d[sz];
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("test.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+    freopen("lasers.in","r",stdin);
+    freopen("lasers.out","w",stdout);
+
+    int n, u1, v1, u2, v2;
+    cin>>n>>u1>>v1>>u2>>v2;
+
+    //0 - X
+    //1 - Y
+    for(int i=1;i<=n;++i){
+        cin>>a[i].first>>a[i].second;
+        gr[0][a[i].first].push_back(i);
+        gr[1][a[i].second].push_back(i);
+        d[i] = 1e18;
+    }
+
+    a[0] = {u1, v1};
+    gr[0][u1].push_back(0);
+    gr[1][v1].push_back(0);
+
+    a[n+1] = {u2, v2};
+    gr[0][u2].push_back(n+1);
+    gr[1][v2].push_back(n+1);
+    d[n+1] = 1e18;
+
+    queue<pll> q;
+    q.push({0, 0});
+    q.push({0, 1});
+
+    while(q.size()){
+        long long idx = q.front().first;
+        long long dir = q.front().second;
+        q.pop();
+
+        long long cur = (dir == 0 ? a[idx].first : a[idx].second);
+        for(long long x : gr[dir][cur]){
+            if(d[idx] + 1 < d[x]){
+                d[x] = d[idx] + 1;
+                q.push({x, !dir});
+            }
+        }
+    }
+
+    cout<<(d[n+1] == 1e18 ? -1 : d[n+1]-1);
+
+    return 0;
+}
