@@ -11,6 +11,7 @@
       - [Book Shop](https://github.com/minionly/USACO/blob/main/USACO/Book%20Shop)
       - [Money Sums](https://github.com/minionly/USACO/blob/main/USACO/Money%20Sums)
       - [Two Sets II](https://github.com/minionly/USACO/blob/main/USACO/Two%20Sets%20II)
+      - [Knapsack](https://github.com/minionly/USACO/blob/main/USACO/Knapsack)
 - Graphs
     - Shortest Paths with Unweighted Edges
       - [Piggy Back](https://github.com/minionly/USACO/blob/main/USACO/Piggyback)
