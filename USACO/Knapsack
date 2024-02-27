@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+#define pll pair<long long, long long>
+
+const int sz = 1e6 + 5;
+vector<pll> a;
+long long f[sz];
+long long s, n;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    freopen("main.inp","r",stdin);
+    freopen("main.out","w",stdout);
+
+    cin>>s>>n;
+
+    for(int i=1;i<=n;++i){
+        long long v, w, k, p=1;
+        cin>>v>>w>>k;
+
+        while(p <= k){
+            k -= p;
+            a.push_back({v*p, w*p});
+            p *= 2;
+        }
+        if(k > 0){
+            a.push_back({v*k, w*k});
+        }
+    }
+
+    for(int i=0;i<a.size();++i){
+        for(int j=s;j>=a[i].second;--j){
+            f[j] = max(f[j], f[j - a[i].second] + a[i].first);
+        }
+    }
+
+    cout<<f[s];
+
+    return 0;
+}
