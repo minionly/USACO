@@ -20,3 +20,4 @@
       - [Graph Girth](https://github.com/minionly/USACO/blob/main/USACO/Graph%20Girth)
       - [BFS-DFS](https://github.com/minionly/USACO/blob/main/USACO/BFS-DFS)
       - [Lasers and Mirrors](https://github.com/minionly/USACO/blob/main/USACO/Lasers%20and%20Mirrors)
+      - [Construct a Palindrome](https://github.com/minionly/USACO/blob/main/USACO/Construct%20a%20Palindrome)
