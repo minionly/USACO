@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+#define pii pair<int, int>
+
+const int sz = 1005;
+vector<pair<int, char>> gr[sz];
+long long d[sz][sz];
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    freopen("test.inp","r",stdin);
+    freopen("test.out","w",stdout);
+
+    int n, m;
+    cin>>n>>m;
+
+    while(m--){
+        int u, v;
+        char c;
+        cin>>u>>v>>c;
+        gr[u].push_back({v, c});
+        gr[v].push_back({u, c});
+    }
+
+    // memset
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<=n;++j){
+            d[i][j] = 1e18;
+        }
+    }
+
+    queue<pii> q;    
+    for(int i=1;i<=n;++i){
+        q.push({i, i});
+        d[i][i] = 0;
+
+        for(pair<int, char> p : gr[i]){
+            int v = p.first;
+            if(d[i][v] == 1e18){
+                q.push({i, v});
+                d[i][v] = d[v][i] = 1;
+            }
+        }
+    }
+
+    while(q.size()){
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        if((x == 1 && y == n) || (x == n && y == 1)){
+            cout<<d[x][y];
+            return 0;
+        }
+
+        for(pair<int, char> p1 : gr[x]){
+            int u = p1.first;
+            int c1 = p1.second;
+            for(pair<int, char> p2 : gr[y]){
+                int v = p2.first;
+                int c2 = p2.second;
+                if(c1 == c2 && d[x][y] + 2 < d[u][v]){
+                    d[u][v] = d[x][y] + 2;
+                    q.push({u, v});
+                }
+            }
+        }
+    }
+    cout<<-1;
+
+    return 0;
+}
