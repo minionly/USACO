@@ -1,6 +1,6 @@
 # USACO Solutions
 
-# Section Gold
+# [Section Gold](https://usaco.guide/gold/)
 - Dynamic Programming
     - Introduction to DP
     - [Knapsack DP](https://usaco.guide/gold/knapsack?lang=cpp) 💰
