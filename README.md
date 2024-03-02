@@ -13,6 +13,7 @@
       - [Two Sets II](https://github.com/minionly/USACO/blob/main/USACO/Two%20Sets%20II)
       - [Knapsack](https://github.com/minionly/USACO/blob/main/USACO/Knapsack)
       - [Fruit Feast](https://github.com/minionly/USACO/blob/main/USACO/Fruit%20Feast)
+    - [Paths on Grids](https://usaco.guide/gold/paths-grids?lang=cpp)
 - Graphs
     - Shortest Paths with Unweighted Edges
       - [Piggy Back](https://github.com/minionly/USACO/blob/main/USACO/Piggyback)
