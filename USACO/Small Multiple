@@ -1,0 +1,60 @@
+/**
+ * @file test.cpp
+ * @author tnknguyen_ (nguyenngockhoitran@gmail.com)
+ * @date 05-03-2024
+ * 
+ * @copyright Copyright (c) 2024
+ * https://atcoder.jp/contests/arc084/tasks/arc084_b
+ */
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+#define pll pair<long long, long long>
+
+const int sz = 1e6 + 5;
+long long d[sz];
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("test.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+
+    long long n;
+    cin>>n;
+
+    fill(d, d+sz, 1e18);
+
+    priority_queue<pll> q;
+    for(long long i=1;i<=9;++i){
+        d[i % n] = i;
+        q.push({-i, i % n});
+    }
+
+    while(q.size()){
+        long long w = -q.top().first;
+        long long u = q.top().second;
+        long long v;
+        q.pop();
+
+        v = (u * 10) % n;
+        if(w < d[v]){
+            d[v] = w;
+            q.push({-w, v});
+        }
+
+        for(int i=1;i<=9;++i){
+            v = (u * 10 + i) % n;
+            if(w + i < d[v]){
+                d[v] = w + i;
+                q.push({-(w + i), v});
+            }
+        }
+    }   
+
+    cout<<d[0];
+
+    return 0;
+}
