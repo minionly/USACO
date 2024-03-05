@@ -24,3 +24,4 @@
       - [Lasers and Mirrors](https://github.com/minionly/USACO/blob/main/USACO/Lasers%20and%20Mirrors)
       - [Construct a Palindrome](https://github.com/minionly/USACO/blob/main/USACO/Construct%20a%20Palindrome)
       - [Cow At Large](https://github.com/minionly/USACO/blob/main/USACO/Cow%20At%20Large)
+      - [Small Multiple](https://github.com/minionly/USACO/blob/main/USACO/Small%20Multiple)
