@@ -1,0 +1,108 @@
+/**
+ * @file test.cpp
+ * @author tnknguyen_ (nguyenngockhoitran@gmail.com)
+ * @date 06-03-2024
+ * 
+ * @copyright Copyright (c) 2024
+ * https://usaco.org/index.php?page=viewproblem2&cpid=646
+ */
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+
+const int sz = 1e6 + 5;
+vector<int> gr[sz];
+long long vi[sz];
+
+struct DSU{
+    vector<int> p, s;
+    int n;
+
+    DSU(int n){
+        this->n = n;
+        p.resize(n + 5);
+        s.resize(n + 5);
+    }
+
+    void make_sets(){
+        for(int i=1;i<=n;++i){
+            p[i] = i;
+            s[i] = 1;
+        }
+    }
+
+    int fp(int u){
+        return (u == p[u] ? u : p[u] = fp(p[u]));
+    }
+
+    bool unite(int u, int v){
+        u = fp(u);
+        v = fp(v);
+
+        if(u == v){
+            return 0;
+        }
+        if(s[u] < s[v]){
+            swap(u, v);
+        }
+        s[u] += s[v];
+        p[v] = u;
+
+        return 1;
+    }
+};
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("closing.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+    freopen("closing.in","r",stdin);
+    freopen("closing.out","w",stdout);
+
+    int n, m;
+    cin>>n>>m;
+
+    while(m--){
+        int u, v;
+        cin>>u>>v;
+        gr[u].push_back(v);
+        gr[v].push_back(u);
+    }
+
+    vector<int> q;
+    deque<string> ans;
+
+    for(int i=1;i<=n;++i){
+        int x;
+        cin>>x;
+        q.push_back(x);
+    }
+
+    DSU dsu(n + 5);
+    dsu.make_sets();
+
+    int c = 0;
+    while(q.size()){
+        int x = q.back();
+        q.pop_back();
+        vi[x] = 1;
+        c++;
+        for(int v : gr[x]){
+            if(vi[v]){
+                if(dsu.unite(v, x)){
+                    c--;
+                }
+            }
+        }
+        ans.push_front(c == 1 ? "YES" : "NO");
+    }
+
+    for(string s : ans){
+        cout<<s<<endl;
+    }
+
+    return 0;
+}
