@@ -1,0 +1,78 @@
+/**
+ * @file test.cpp
+ * @author tnknguyen_ (nguyenngockhoitran@gmail.com)
+ * @date 07-03-2024
+ * 
+ * @copyright Copyright (c) 2024
+ * https://cses.fi/problemset/task/1676
+ */
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n' 
+
+struct DSU{
+    vector<int> s, p;
+    int n, ma, c;
+
+    DSU(int n){
+        this->n = n;
+        ma = 0;
+        c = n;
+        s.resize(n+5);
+        p.resize(n+5);
+    }
+
+    void make_sets(){
+        for(int i=1;i<=n;++i){
+            p[i] = i;
+            s[i] = 1;
+        }
+    }
+
+    int get(int u){
+        return (u == p[u] ? u : p[u] = get(p[u]));
+    }
+
+    bool unite(int u, int v){
+        u = get(u);
+        v = get(v);
+
+        if(u == v){
+            return 0;
+        }
+        if(s[u] < s[v]){
+            swap(u, v);
+        }
+        s[u] += s[v];
+        p[v] = u;
+        c--;
+        ma = max(ma, s[u]);
+
+        return 1;
+    }
+};
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("test.inp","r",stdin);
+    // freopen("test.out","w",stdout);
+    
+    int n, m;
+    cin>>n>>m;
+
+    DSU dsu(n);
+    dsu.make_sets();
+
+    while(m--){
+        int u, v;
+        cin>>u>>v;
+
+        dsu.unite(u, v);
+        cout<<dsu.c<<' '<<dsu.ma<<endl;
+    }
+
+    return 0;
+}
