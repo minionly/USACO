@@ -1,0 +1,149 @@
+/**
+ * @file main.cpp
+ * @author tnknguyen_ (nguyenngockhoitran@gmail.com)
+ * @date 13-03-2024
+ * 
+ * @copyright Copyright (c) 2024
+ * https://csacademy.com/contest/archive/task/mountain-time
+ */
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define endl '\n' 
+#define pii pair<int, int>
+
+const int sz = 1e3 + 5;
+const int dx[] = {0, 1, 0, -1};
+const int dy[] = {1, 0, -1, 0};
+int n, m;
+long long a[sz][sz];
+long long ans[sz][sz];
+
+// ------------ FUNCTIONS -----------
+bool valid(int x, int y){
+    return (x >= 1 && x <= n && y >= 1 && y <= m);
+}
+
+int get_id(int x, int y){
+    return (x-1)*m + y;
+}
+
+pii get_p(int id){
+    int x = (id % m == 0 ? id/m : id/m+1);
+    int y = (id % m == 0 ? m : id % m);
+    return {x, y};
+}
+
+int val(int id){
+    pii p = get_p(id);
+    return a[p.first][p.second];
+}
+
+struct DSU{
+    vector<int> p, s;
+    vector<vector<int>> comp;
+
+    DSU(int n){
+        p.resize(n+5);
+        s.resize(n+5);
+        comp.resize(n+5);
+
+        for(int i=1;i<=n;++i){
+            p[i] = i;
+            s[i] = 1;
+            comp[i] = {i};
+        }
+    }
+
+    int get(int u){
+        return (u == p[u] ? u : p[u] = get(p[u]));
+    }
+
+    bool unite(int u, int v){
+        int middle = val(u);
+        u = get(u);
+        v = get(v);
+
+        if(u == v){
+            return 0;
+        }
+        if(val(u) < val(v)){
+            swap(u, v);
+        }
+        if(val(u) > val(v)){
+            for(int x : comp[v]){
+                pii p = get_p(x);
+                int t = ans[p.first][p.second];
+                ans[p.first][p.second] = (t>middle ? t-middle : 0);
+
+            }
+            comp[v].clear();
+            s[u] += s[v];
+            p[v] = u;
+        }
+        else if(val(u) == val(v)){
+            if(s[u] < s[v]){
+                swap(u, v);
+            }
+            for(int x : comp[v]){
+                comp[u].push_back(x);
+            }
+            comp[v].clear();
+            s[u] += s[v];
+            p[v] = u;
+        }
+
+        return 1;
+    }
+};
+
+int32_t main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    freopen("main.inp","r",stdin);
+    freopen("main.out","w",stdout);
+    
+    cin>>n>>m;
+    
+    vector<pii> vt;
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<=m;++j){
+            cin>>a[i][j];
+            ans[i][j] = a[i][j];
+            vt.push_back({a[i][j], get_id(i, j)});
+        }
+    }
+
+    sort(vt.begin(), vt.end(), [](pii a, pii b){
+        return a.first > b.first;
+    });
+
+    DSU dsu(n*m);
+    for(pii p : vt){
+        int x, y, id1;
+        tie(x, y) = get_p(p.second);
+        id1 = get_id(x, y);
+
+        for(int i=0;i<4;++i){
+            int u = x + dx[i];
+            int v = y + dy[i];
+            int id2 = get_id(u, v);
+            if(!valid(u, v) || val(id2) < val(id1)){
+                continue;
+            }
+            dsu.unite(id1, id2);
+        }
+    }
+
+
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<=m;++j){
+            cout<<ans[i][j]<<' ';
+        }
+        cout<<endl;
+    }
+
+    return 0;
+}
