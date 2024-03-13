@@ -29,3 +29,4 @@
     - Disjoint Set Union
       - [Road Construction](https://github.com/minionly/USACO/blob/main/USACO/Road%20Construction)
       - [CLosing the Farm](https://github.com/minionly/USACO/blob/main/USACO/Closing%20the%20Farm)
+      - [Moundtain Time](https://github.com/minionly/USACO/blob/main/USACO/Mountain%20Time)
