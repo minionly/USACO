@@ -1,0 +1,66 @@
+/**
+ * @file main.cpp
+ * @author tnknguyen_ (nguyenngockhoitran@gmail.com)
+ * @date 13-03-2024
+ * 
+ * @copyright Copyright (c) 2024
+ * https://usaco.org/index.php?page=viewproblem2&cpid=670
+ */
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+#define endl '\n' 
+#define pii pair<int, int>
+
+const int sz = 1005;
+long long G, H;
+pii a[sz], b[sz];
+long long f[sz][sz][5];
+
+long long euler(pii a, pii b){
+    long long x = a.first - b.first;
+    long long y = a.second - b.second;
+
+    return (x*x + y*y);
+}
+
+int32_t main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    // freopen("main.inp","r",stdin);
+    // freopen("main.out","w",stdout);
+    freopen("checklist.in","r",stdin);
+    freopen("checklist.out","w",stdout);
+
+    cin>>H>>G;
+
+    for(int i=0;i<H;++i){
+        cin>>a[i].first>>a[i].second;
+    }   
+    for(int i=0;i<G;++i){
+        cin>>b[i].first>>b[i].second;
+    }
+
+    memset(f, 63, sizeof(f));
+    f[1][0][0] = 0;
+    for(int i=0;i<=H;++i){
+        for(int j=0;j<=G;++j){
+            if(i > 1){
+                f[i][j][0] = min(f[i][j][0], f[i-1][j][0] + euler(a[i-2], a[i-1]));
+            }
+            if(j > 1){
+                f[i][j][1] = min(f[i][j][1], f[i][j-1][1] + euler(b[j-2], b[j-1]));
+            }
+            if(i > 0 && j > 0){
+                f[i][j][0] = min(f[i][j][0], f[i-1][j][1] + euler(a[i-1], b[j-1]));
+                f[i][j][1] = min(f[i][j][1], f[i][j-1][0] + euler(a[i-1], b[j-1]));
+            }
+        }
+    }
+
+    cout<<f[H][G][0];
+
+    return 0;
+}
